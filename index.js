@@ -1,14 +1,18 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
 
-app.get("/books", (req, res) => {
-    console.log ( "Fetching all books")
-});
+app.use(allBooks);
 
-app.get("/books/name", (req, res) => {
-    console.log ("GameOfThrones")
-});
-
-app.listen(5000, () =>{
-    console.log("listening  on port 5000")
+app.get('/books', (req, res) =>{
+  return res.send({ route: '/books' });
 })
+
+function allBooks(req, res,next) {
+  console.log ( "Fetching all books");
+  next();
+}
+
+app.listen(5000, () => {
+    console.log("listening on port 5000");
+  });
